@@ -399,7 +399,7 @@
 
 <!-- Music -->
 <audio id="bg-music" loop preload="none">
-  <source src="https://media.vole.wtf/happy-birthday/techno.mp3" type="audio/mpeg">
+  <source src="https://media.vole.wtf/happy-birthday/choir.mp3" type="audio/mpeg">
 </audio>
 <div id="music-toggle" title="Toggle music">
   <span class="music-icon">🔇</span>
@@ -605,7 +605,6 @@
     intro.classList.add('hidden');
     document.body.style.overflow = 'auto';
     setTimeout(()=>{ site.classList.add('visible'); }, 200);
-    tryPlayMusic();
   });
 
   musicToggle.addEventListener('click', function(){
@@ -618,6 +617,25 @@
       tryPlayMusic();
     }
   });
+
+  // Start music on the very first tap/click/keypress anywhere on the page —
+  // browsers block audio until a real user interaction happens, so this
+  // catches whichever comes first (intro text, button, anywhere).
+  let userInteracted = false;
+  function startOnFirstInteraction(){
+    if(userInteracted) return;
+    userInteracted = true;
+    tryPlayMusic();
+    document.removeEventListener('click', startOnFirstInteraction);
+    document.removeEventListener('touchstart', startOnFirstInteraction);
+    document.removeEventListener('keydown', startOnFirstInteraction);
+  }
+  document.addEventListener('click', startOnFirstInteraction);
+  document.addEventListener('touchstart', startOnFirstInteraction);
+  document.addEventListener('keydown', startOnFirstInteraction);
+
+  // Also try immediately in case the browser allows it (some do after a prior visit)
+  tryPlayMusic();
 
   /* ================= Scroll reveal ================= */
   const revealEls = document.querySelectorAll('.reveal');
