@@ -252,6 +252,22 @@
   @keyframes driveAcross{ 0%{ left:-25%; } 100%{ left:115%; } }
 
   /* ---------- Letter ---------- */
+  .us-frame{
+    position:relative; width:220px; margin:0 auto 34px auto;
+    padding:14px 14px 46px 14px; background:linear-gradient(160deg, #fffdf9, var(--cream));
+    border-radius:6px; box-shadow:0 24px 50px rgba(0,0,0,0.5), 0 0 0 1px var(--glass-border);
+    transform:rotate(-3deg); transition:transform 0.4s ease;
+  }
+  .us-frame:hover{ transform:rotate(0deg) scale(1.03); }
+  .us-frame img{
+    width:100%; height:220px; object-fit:cover; border-radius:3px; display:block;
+    box-shadow:inset 0 0 20px rgba(0,0,0,0.15);
+  }
+  .us-caption{
+    position:absolute; bottom:12px; left:0; right:0; text-align:center;
+    font-family:'Alex Brush', cursive; font-size:22px; color:var(--midnight-2);
+  }
+
   .letter-card{
     max-width:640px; width:100%; background:var(--glass); backdrop-filter:blur(18px);
     border:1px solid var(--glass-border); border-radius:26px; padding:clamp(28px,5vw,56px);
@@ -342,10 +358,17 @@
   }
   .memory-card.in{ opacity:1; transform:translateY(0) rotateX(0deg); }
   .memory-photo{
-    width:100%; height:150px; border-radius:14px; margin-bottom:16px;
+    width:100%; height:180px; border-radius:14px; margin-bottom:16px;
     background:linear-gradient(135deg, var(--midnight-3), var(--rose-deep));
     display:flex; align-items:center; justify-content:center; font-size:32px;
+    overflow:hidden; position:relative; border:1px solid var(--glass-border);
+    box-shadow:inset 0 0 30px rgba(0,0,0,0.25);
   }
+  .memory-photo img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform 0.5s ease;
+  }
+  .memory-card:hover .memory-photo img{ transform:scale(1.06); }
   .memory-caption{ font-family:'Cormorant Garamond', serif; font-size:18px; font-weight:600; line-height:1.4; color:var(--cream); }
 
   /* ---------- Interactive surprise ---------- */
@@ -571,6 +594,10 @@
   <section id="letter">
     <p class="eyebrow reveal">from my heart, to you</p>
     <h2 class="section-title reveal">A Little Something For You 💌</h2>
+    <div class="us-frame reveal">
+      <img src="images/memory-4.jpg" alt="Us">
+      <span class="us-caption">us. always. ❤️</span>
+    </div>
     <div class="letter-card reveal">
       <div class="letter-body" id="letter-body">
         <p>My Umm-e-Roman,</p>
@@ -863,10 +890,10 @@
 
   /* ================= Memory lane ================= */
   const memories = [
-    { icon:'🌱', caption:'The day we found each other' },
-    { icon:'😂', caption:'That one memory we still laugh about' },
-    { icon:'☎️', caption:'The conversations that somehow lasted all night' },
-    { icon:'🌟', caption:'The moments that became unforgettable' },
+    { img:'images/memory-4.jpg', caption:'The day we found each other' },
+    { img:'images/memory-1.jpg', caption:'That one memory we still laugh about' },
+    { img:'images/memory-2.jpg', caption:'The conversations that somehow lasted all night' },
+    { img:'images/memory-3.jpg', caption:'The moments that became unforgettable' },
     { icon:'📸', caption:'Add our next memory here' }
   ];
   const timeline = document.getElementById('timeline');
@@ -874,7 +901,8 @@
     const card = document.createElement('div');
     card.className = 'memory-card';
     card.style.transitionDelay = (i*0.08)+'s';
-    card.innerHTML = `<div class="memory-photo">${m.icon}</div><div class="memory-caption">${m.caption}</div>`;
+    const photoContent = m.img ? `<img src="${m.img}" alt="${m.caption}" loading="lazy">` : m.icon;
+    card.innerHTML = `<div class="memory-photo">${photoContent}</div><div class="memory-caption">${m.caption}</div>`;
     timeline.appendChild(card);
   });
   const memIo = new IntersectionObserver((entries)=>{
