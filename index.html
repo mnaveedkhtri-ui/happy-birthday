@@ -260,7 +260,7 @@
   }
   .us-frame:hover{ transform:rotate(0deg) scale(1.03); }
   .us-frame img{
-    width:100%; height:220px; object-fit:cover; border-radius:3px; display:block;
+    width:100%; height:220px; object-fit:cover; object-position:center 15%; border-radius:3px; display:block;
     box-shadow:inset 0 0 20px rgba(0,0,0,0.15);
   }
   .us-caption{
@@ -365,7 +365,7 @@
     box-shadow:inset 0 0 30px rgba(0,0,0,0.25);
   }
   .memory-photo img{
-    width:100%; height:100%; object-fit:cover; display:block;
+    width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block;
     transition:transform 0.5s ease;
   }
   .memory-card:hover .memory-photo img{ transform:scale(1.06); }
@@ -595,8 +595,8 @@
     <p class="eyebrow reveal">from my heart, to you</p>
     <h2 class="section-title reveal">A Little Something For You 💌</h2>
     <div class="us-frame reveal">
-      <img src="memory-4.jpg" alt="Us">
-      <span class="us-caption">us. always. ❤️</span>
+      <img src="memory-4.jpg" alt="Umm-e-Roman">
+      <span class="us-caption">my favorite face ❤️</span>
     </div>
     <div class="letter-card reveal">
       <div class="letter-body" id="letter-body">
@@ -629,7 +629,7 @@
   <section id="memory-lane">
     <p class="eyebrow reveal">a little scroll through time</p>
     <h2 class="section-title reveal">Our Little Universe 🌙</h2>
-    <p class="subtext reveal">Placeholder memories — swap these for our real photos whenever you're ready.</p>
+    <p class="subtext reveal">A few of my favorite glimpses of you.</p>
     <div class="timeline-wrap">
       <div class="timeline" id="timeline"></div>
     </div>
@@ -890,10 +890,10 @@
 
   /* ================= Memory lane ================= */
   const memories = [
-    { img:'memory-4.jpg', caption:'The day we found each other' },
-    { img:'memory-1.jpg', caption:'That one memory we still laugh about' },
-    { img:'memory-2.jpg', caption:'The conversations that somehow lasted all night' },
-    { img:'memory-3.jpg', caption:'The moments that became unforgettable' },
+    { img:'memory-4.jpg', caption:'This smile. Always my favorite.' },
+    { img:'memory-1.jpg', caption:'You, looking effortlessly beautiful' },
+    { img:'memory-2.jpg', caption:'Just... you' },
+    { img:'memory-3.jpg', caption:'Everything about this says you' },
     { icon:'📸', caption:'Add our next memory here' }
   ];
   const timeline = document.getElementById('timeline');
